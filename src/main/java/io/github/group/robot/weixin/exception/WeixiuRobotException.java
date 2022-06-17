@@ -11,4 +11,8 @@ public class WeixiuRobotException extends RuntimeException {
     public WeixiuRobotException(String message) {
         super(message);
     }
+
+    public WeixiuRobotException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
