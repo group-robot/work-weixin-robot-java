@@ -40,7 +40,7 @@ class NewsNoticeCardTest {
             .cardImage(
                 CardImage.builder()
                     .url("https://wework.qpic.cn/wwpic/354393_4zpkKXd7SrGMvfg_1629280616/0")
-                    .aspectRatio("2.25")
+                    .aspectRatio(2.25)
                     .build()
             )
             .imageTextArea(

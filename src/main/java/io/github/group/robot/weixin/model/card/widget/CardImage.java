@@ -28,7 +28,7 @@ public class CardImage implements Message {
     /**
      * 图片的宽高比，宽高比要小于2.25，大于1.3，不填该参数默认1.3
      */
-    private String aspectRatio;
+    private Double aspectRatio;
 
     @Override
     public Map<String, Object> toMessageMap() {

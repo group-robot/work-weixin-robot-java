@@ -25,8 +25,9 @@ public class MarkdownMessage extends AbstractMessage {
     }
 
     /**
-     * at all
+     * at all,好像不起作用
      */
+    @Deprecated
     private boolean atAll;
     /**
      * markdown内容，最长不超过4096个字节，必须是utf8编码
@@ -41,7 +42,7 @@ public class MarkdownMessage extends AbstractMessage {
         Map<String, Object> markdownMessage = new HashMap<>(1);
         String content = this.content;
         if (isAtAll()) {
-            content = content + "<" + AT_ALL + ">";
+            content = content + "\n<" + AT_ALL + ">";
         }
         markdownMessage.put("content", content);
         Map<String, Object> message = new HashMap<>(2);
@@ -74,7 +75,7 @@ public class MarkdownMessage extends AbstractMessage {
          *
          * @return builder
          */
-        public MarkdownMessageBuilder setAtAll(boolean atAll){
+        public MarkdownMessageBuilder setAtAll(boolean atAll) {
             message.setAtAll(atAll);
             return this;
         }

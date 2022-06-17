@@ -29,4 +29,20 @@ public class JacksonUtil {
             throw new WeixiuRobotException("to string json error", e);
         }
     }
+
+    /**
+     * json string to object
+     *
+     * @param jsonStr json string
+     * @param clazz   object type
+     * @param <T>     object ype
+     * @return object
+     */
+    public <T> T toObj(String jsonStr, Class<T> clazz) {
+        try {
+            return OBJECT_MAPPER.readValue(jsonStr, clazz);
+        } catch (Exception e) {
+            throw new WeixiuRobotException("to object error", e);
+        }
+    }
 }

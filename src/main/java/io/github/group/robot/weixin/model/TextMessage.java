@@ -48,7 +48,7 @@ public class TextMessage extends AbstractMessage {
             throw new WeixiuRobotException("文本内容为空");
         }
         Map<String, Object> textMessage = new HashMap<>(3);
-        textMessage.put("cotnent", this.content);
+        textMessage.put("content", this.content);
         textMessage.put("mentioned_list", this.mentionedList);
         textMessage.put("mentioned_mobile_list", this.mentionedMobileList);
 

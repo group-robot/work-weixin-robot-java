@@ -1,49 +1,134 @@
-# java-work-weixin-robot
-企业微信群机器人java版
+package io.github.group.robot.weixin;
 
-# example
-## Text
-```java
-TextMessage message = TextMessage.TextMessageBuilder.builder()
-    .setContent("广州今日天气：29度，大部分多云，降雨概率：60%")
-    .setMentioned("wangqing")
-    .mentionedAtAll()
-    .setMobile("13800001111")
-    .mobileAtAll()
-    .build();
-```
-## Markdown
-```java
-MarkdownMessage message = MarkdownMessage.MarkdownMessageBuilder.builder()
-            .content("实时新增用户反馈<font color=\"warning\">132例</font>，请相关同事注意。\n"
-                + ">类型:<font color=\"comment\">用户反馈</font>"
-                + ">普通用户反馈:<font color=\"comment\">117例</font>"
-                + ">VIP用户反馈:<font color=\"comment\">15例</font>")
-            .build();
-```
-## Image
-```java
-ImageMessage message = ImageMessage.ImageMessageBuilder.builder()
-            .base64("data")
-            .md5("md5")
-            .build();
-```
-## News
-```java
-NewsMessage message = NewsMessage.NewsMessageBuilder.builder()
-            .addArticle(
-                Article
-                    .builder()
-                    .title("中秋节礼品领取")
-                    .description("今年中秋节公司有豪礼相送")
-                    .url("www.qq.com")
-                    .picurl("http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png")
-                    .build()
-            ).build();
-```
-## card
-```java
-TemplateCardMessage.TemplateCardMessageBuilder.builder()
+import io.github.group.robot.weixin.commons.CardActionType;
+import io.github.group.robot.weixin.commons.DescColor;
+import io.github.group.robot.weixin.commons.HorizontalContentType;
+import io.github.group.robot.weixin.commons.ImageTextAreaType;
+import io.github.group.robot.weixin.commons.JumpType;
+import io.github.group.robot.weixin.commons.QuoteType;
+import io.github.group.robot.weixin.model.ImageMessage;
+import io.github.group.robot.weixin.model.MarkdownMessage;
+import io.github.group.robot.weixin.model.NewsMessage;
+import io.github.group.robot.weixin.model.TemplateCardMessage;
+import io.github.group.robot.weixin.model.TextMessage;
+import io.github.group.robot.weixin.model.card.NewsNoticeCard;
+import io.github.group.robot.weixin.model.card.TextNoticeCard;
+import io.github.group.robot.weixin.model.card.widget.CardAction;
+import io.github.group.robot.weixin.model.card.widget.CardImage;
+import io.github.group.robot.weixin.model.card.widget.EmphasisContent;
+import io.github.group.robot.weixin.model.card.widget.HorizontalContent;
+import io.github.group.robot.weixin.model.card.widget.ImageTextArea;
+import io.github.group.robot.weixin.model.card.widget.Jump;
+import io.github.group.robot.weixin.model.card.widget.MainTitle;
+import io.github.group.robot.weixin.model.card.widget.QuoteArea;
+import io.github.group.robot.weixin.model.card.widget.Source;
+import io.github.group.robot.weixin.model.card.widget.VerticalContent;
+import io.github.group.robot.weixin.model.news.Article;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+
+@Slf4j
+class RobotSendTest {
+    RobotSend send = new RobotSend();
+
+    @Test
+    void send() {
+        String webhook = System.getenv("webhook");
+        send.setWebhook(webhook);
+        RobotResult result = send.send(TextMessage.TextMessageBuilder.builder().setContent("Hi，我是机器人测试\n" +
+            "由XX于06月17日添加到群").build());
+        log.info(result.toString());
+    }
+
+    @Test
+    void sendTextMessageTest() {
+        String webhook = System.getenv("webhook");
+        send.setWebhook(webhook);
+        RobotResult result = send.send(TextMessage.TextMessageBuilder.builder().setContent("Hi，我是机器人测试\n" +
+            "由XX于06月17日添加到群").build());
+        log.info(result.toString());
+    }
+
+    @Test
+    void sendTextMessageATAllTest() {
+        String webhook = System.getenv("webhook");
+        send.setWebhook(webhook);
+        RobotResult result = send.send(TextMessage.TextMessageBuilder.builder().setContent("Hi，我是机器人测试\n" +
+            "由XX于06月17日添加到群").mobileAtAll().build());
+        log.info(result.toString());
+    }
+
+    @Test
+    void sendMarkdownMessageTest() {
+        String webhook = System.getenv("webhook");
+        send.setWebhook(webhook);
+        RobotResult result = send.send(
+            MarkdownMessage.MarkdownMessageBuilder
+                .builder()
+                .content("实时新增用户反馈<font color=\"warning\">132例</font>，请相关同事注意。\n"
+                    + ">类型:<font color=\"comment\">用户反馈</font>\n"
+                    + ">普通用户反馈:<font color=\"comment\">117例</font>\n"
+                    + ">VIP用户反馈:<font color=\"comment\">15例</font>")
+                .build()
+        );
+        log.info(result.toString());
+    }
+
+    @Test
+    void sendMarkdownMessageAtAllTest() {
+        String webhook = System.getenv("webhook");
+        send.setWebhook(webhook);
+        RobotResult result = send.send(
+            MarkdownMessage.MarkdownMessageBuilder
+                .builder()
+                .content("实时新增用户反馈<font color=\"warning\">132例</font>，请相关同事注意。\n"
+                    + ">类型:<font color=\"comment\">用户反馈</font>\n"
+                    + ">普通用户反馈:<font color=\"comment\">117例</font>\n"
+                    + ">VIP用户反馈:<font color=\"comment\">15例</font>")
+                .atAll()
+                .build()
+        );
+        log.info(result.toString());
+    }
+
+    @Test
+    void imageMessageTest() {
+        String webhook = System.getenv("webhook");
+        send.setWebhook(webhook);
+        RobotResult result = send.send(
+            ImageMessage.ImageMessageBuilder.builder()
+                .md5("")
+                .base64("")
+                .build()
+        );
+        log.info(result.toString());
+    }
+
+    @Test
+    void newsMessageTest() {
+        String webhook = System.getenv("webhook");
+        send.setWebhook(webhook);
+        RobotResult result = send.send(
+            NewsMessage.NewsMessageBuilder.builder()
+                .addArticle(
+                    Article
+                        .builder()
+                        .title("中秋节礼品领取")
+                        .description("今年中秋节公司有豪礼相送")
+                        .url("www.qq.com")
+                        .picurl("http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png")
+                        .build()
+                ).build()
+        );
+        log.info(result.toString());
+    }
+
+    @Test
+    void textNoticeCardMessageTest() {
+        String webhook = System.getenv("webhook");
+        send.setWebhook(webhook);
+        RobotResult result = send.send(
+            TemplateCardMessage.TemplateCardMessageBuilder.builder()
                 .templateCard(
                     TextNoticeCard.TextNoticeCardBuilder.builder()
                         .source(
@@ -119,10 +204,16 @@ TemplateCardMessage.TemplateCardMessageBuilder.builder()
                         .build()
                 )
                 .build()
-```
+        );
+        log.info(result.toString());
+    }
 
-```java
-TemplateCardMessage.TemplateCardMessageBuilder.builder()
+    @Test
+    void NewsNoticeCardMessageTest() {
+        String webhook = System.getenv("webhook");
+        send.setWebhook(webhook);
+        RobotResult result = send.send(
+            TemplateCardMessage.TemplateCardMessageBuilder.builder()
                 .templateCard(
                     NewsNoticeCard.NewsNoticeCardBuilder.builder()
                         .source(
@@ -213,7 +304,7 @@ TemplateCardMessage.TemplateCardMessageBuilder.builder()
                         .build()
                 )
                 .build()
-```
-
-# TODO
-* file message
+        );
+        log.info(result.toString());
+    }
+}
