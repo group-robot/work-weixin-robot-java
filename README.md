@@ -1,5 +1,30 @@
+<h1 align="center"><a href="https://github.com/group-robot/java-work-weixin-robot" target="_blank">java-work-weixin-robot</a></h1>
+<p align="center">
+<a href="https://search.maven.org/artifact/io.github.group-robot/java-work-weixin-robot">
+<img alt="Maven Central" src="https://img.shields.io/maven-central/v/io.github.group-robot/java-work-weixin-robot?style=flat-square">
+</a>
+<a href="https://github.com/group-robot/java-work-weixin-robot/blob/master/LICENSE">
+<img alt="GitHub" src="https://img.shields.io/github/license/group-robot/java-work-weixin-robot?style=flat-square">
+</a>
+<a href="https://github.com/group-robot/java-work-weixin-robot/actions">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/group-robot/java-work-weixin-robot/Tag%20Release?style=flat-square">
+</a>
+<a href="https://www.oracle.com/java/technologies/javase-downloads.html">
+<img alt="jdk" src="https://img.shields.io/badge/jdk-8%2B-green?style=flat-square">
+</a>
+</p>
+
 # java-work-weixin-robot
 企业微信群机器人java版[docs](https://developer.work.weixin.qq.com/document/path/91770)
+
+# maven
+```xml
+<dependency>
+    <groupId>io.github.group-robot</groupId>
+    <artifactId>wrok-weixin-robot-core</artifactId>
+    <version>${version}</version>
+</dependency>
+```
 
 # example
 ## Text
