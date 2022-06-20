@@ -1,10 +1,11 @@
 package io.github.group.robot.weixin;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.hb0730.jsons.SimpleJsonProxy;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * result
@@ -19,16 +20,22 @@ public class RobotResult implements Serializable {
     /**
      * error code
      */
-    @JsonAlias("errcode")
     private Integer errorCode;
     /**
      * '
      * error msg
      */
-    @JsonAlias("errmsg")
     private String errorMsg;
 
     public boolean isSuccess() {
         return this.errorCode == 0;
+    }
+
+    public static RobotResult toObject(String json) {
+        Map resultMap = SimpleJsonProxy.json.fromJson(json, Map.class);
+        RobotResult result = new RobotResult();
+        result.setErrorCode(Integer.valueOf(resultMap.get("errcode").toString()));
+        result.setErrorMsg(resultMap.get("errmsg").toString());
+        return result;
     }
 }

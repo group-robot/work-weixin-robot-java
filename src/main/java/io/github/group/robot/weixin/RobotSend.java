@@ -2,11 +2,10 @@ package io.github.group.robot.weixin;
 
 import cn.hutool.core.util.StrUtil;
 import com.hb0730.https.HttpHeader;
-import com.hb0730.https.Https;
+import com.hb0730.https.SimpleHttp;
 import com.hb0730.https.constants.Constants;
-import com.hb0730.https.inter.SyncHttp;
 import com.hb0730.https.support.SimpleHttpResponse;
-import io.github.group.robot.weixin.commons.JacksonUtil;
+import com.hb0730.jsons.SimpleJsonProxy;
 import io.github.group.robot.weixin.exception.WeixiuRobotException;
 import io.github.group.robot.weixin.model.Message;
 import lombok.Getter;
@@ -50,19 +49,18 @@ public class RobotSend {
             throw new WeixiuRobotException("message missing");
         }
         if (StrUtil.isBlank(this.webhook)) {
-            throw new WeixiuRobotException("webhook missing");
+            throw new WeixiuRobotException("url missing");
         }
-        SyncHttp http = Https.SYNC.getHttp();
-        String body = JacksonUtil.toStr(message.toMessageMap());
-        SimpleHttpResponse response = http.post(webhook, body,
+        String jsonStr = SimpleJsonProxy.json.toJson(message.toMessageMap());
+        SimpleHttpResponse response = SimpleHttp.HTTP.post(webhook, jsonStr,
             HttpHeader.builder().add(Constants.CONTENT_TYPE,
                 Constants.CONTENT_TYPE_JSON_UTF_8));
         if (log.isDebugEnabled()) {
-            log.info("request body:{}", body);
+            log.info("request body:{}", jsonStr);
             log.info("response status: {},body:{}", response.isSuccess(), response.isSuccess() ? response.getBodyStr() :
                 "");
         }
-        return JacksonUtil.toObj(response.getBodyStr(), RobotResult.class);
+        return RobotResult.toObject(response.getBodyStr());
     }
 
 }
