@@ -48,15 +48,28 @@ public class RobotSend {
         if (null == message) {
             throw new WeixiuRobotException("message missing");
         }
+        String jsonStr = SimpleJsonProxy.json.toJson(message.toMessageMap());
+        return send(jsonStr);
+    }
+
+    /**
+     * send request
+     *
+     * @param message message json
+     * @return send response
+     */
+    public RobotResult send(String message) {
         if (StrUtil.isBlank(this.webhook)) {
             throw new WeixiuRobotException("url missing");
         }
-        String jsonStr = SimpleJsonProxy.json.toJson(message.toMessageMap());
-        SimpleHttpResponse response = SimpleHttp.HTTP.post(webhook, jsonStr,
+        if (StrUtil.isBlank(message)) {
+            throw new WeixiuRobotException("message missing");
+        }
+        SimpleHttpResponse response = SimpleHttp.HTTP.post(webhook, message,
             HttpHeader.builder().add(Constants.CONTENT_TYPE,
                 Constants.CONTENT_TYPE_JSON_UTF_8));
         if (log.isDebugEnabled()) {
-            log.info("request body:{}", jsonStr);
+            log.info("request body:{}", message);
             log.info("response status: {},body:{}", response.isSuccess(), response.isSuccess() ? response.getBodyStr() :
                 "");
         }
