@@ -21,7 +21,7 @@
 ```xml
 <dependency>
     <groupId>io.github.group-robot</groupId>
-    <artifactId>wrok-weixin-robot-core</artifactId>
+    <artifactId>work-weixin-robot-core</artifactId>
     <version>${version}</version>
 </dependency>
 ```

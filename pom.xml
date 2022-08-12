@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.group-robot</groupId>
-    <artifactId>wrok-weixin-robot-core</artifactId>
-    <version>1.0.1</version>
+    <artifactId>work-weixin-robot-core</artifactId>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
-    <name>wrok-weixiu-robot-core</name>
+    <name>work-weixiu-robot-core</name>
     <description>work weixin group robot java version</description>
     <url>https://github.com/group-robot/java-work-weixin-robot</url>
 
