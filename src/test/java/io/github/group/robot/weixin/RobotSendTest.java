@@ -29,13 +29,13 @@ import org.junit.jupiter.api.Test;
 
 @Slf4j
 class RobotSendTest {
-    RobotSend send = new RobotSend();
+    WeixinRobotClient send = new WeixinRobotClient();
 
     @Test
     void send() {
         String webhook = System.getenv("webhook");
         send.setWebhook(webhook);
-        RobotResult result = send.send(TextMessage.TextMessageBuilder.builder().setContent("Hi，我是机器人测试\n" +
+        RobotResult result = send.sendMessage(TextMessage.TextMessageBuilder.builder().setContent("Hi，我是机器人测试\n" +
             "由XX于06月17日添加到群").build());
         log.info(result.toString());
     }
@@ -44,7 +44,7 @@ class RobotSendTest {
     void sendTextMessageTest() {
         String webhook = System.getenv("webhook");
         send.setWebhook(webhook);
-        RobotResult result = send.send(TextMessage.TextMessageBuilder.builder().setContent("Hi，我是机器人测试\n" +
+        RobotResult result = send.sendMessage(TextMessage.TextMessageBuilder.builder().setContent("Hi，我是机器人测试\n" +
             "由XX于06月17日添加到群").build());
         log.info(result.toString());
     }
@@ -53,7 +53,7 @@ class RobotSendTest {
     void sendTextMessageATAllTest() {
         String webhook = System.getenv("webhook");
         send.setWebhook(webhook);
-        RobotResult result = send.send(TextMessage.TextMessageBuilder.builder().setContent("Hi，我是机器人测试\n" +
+        RobotResult result = send.sendMessage(TextMessage.TextMessageBuilder.builder().setContent("Hi，我是机器人测试\n" +
             "由XX于06月17日添加到群").mobileAtAll().build());
         log.info(result.toString());
     }
@@ -62,7 +62,7 @@ class RobotSendTest {
     void sendMarkdownMessageTest() {
         String webhook = System.getenv("webhook");
         send.setWebhook(webhook);
-        RobotResult result = send.send(
+        RobotResult result = send.sendMessage(
             MarkdownMessage.MarkdownMessageBuilder
                 .builder()
                 .content("实时新增用户反馈<font color=\"warning\">132例</font>，请相关同事注意。\n"
@@ -78,7 +78,7 @@ class RobotSendTest {
     void sendMarkdownMessageAtAllTest() {
         String webhook = System.getenv("webhook");
         send.setWebhook(webhook);
-        RobotResult result = send.send(
+        RobotResult result = send.sendMessage(
             MarkdownMessage.MarkdownMessageBuilder
                 .builder()
                 .content("实时新增用户反馈<font color=\"warning\">132例</font>，请相关同事注意。\n"
@@ -95,7 +95,7 @@ class RobotSendTest {
     void imageMessageTest() {
         String webhook = System.getenv("webhook");
         send.setWebhook(webhook);
-        RobotResult result = send.send(
+        RobotResult result = send.sendMessage(
             ImageMessage.ImageMessageBuilder.builder()
                 .md5("")
                 .base64("")
@@ -108,7 +108,7 @@ class RobotSendTest {
     void newsMessageTest() {
         String webhook = System.getenv("webhook");
         send.setWebhook(webhook);
-        RobotResult result = send.send(
+        RobotResult result = send.sendMessage(
             NewsMessage.NewsMessageBuilder.builder()
                 .addArticle(
                     Article
@@ -127,7 +127,7 @@ class RobotSendTest {
     void textNoticeCardMessageTest() {
         String webhook = System.getenv("webhook");
         send.setWebhook(webhook);
-        RobotResult result = send.send(
+        RobotResult result = send.sendMessage(
             TemplateCardMessage.TemplateCardMessageBuilder.builder()
                 .templateCard(
                     TextNoticeCard.TextNoticeCardBuilder.builder()
@@ -212,7 +212,7 @@ class RobotSendTest {
     void NewsNoticeCardMessageTest() {
         String webhook = System.getenv("webhook");
         send.setWebhook(webhook);
-        RobotResult result = send.send(
+        RobotResult result = send.sendMessage(
             TemplateCardMessage.TemplateCardMessageBuilder.builder()
                 .templateCard(
                     NewsNoticeCard.NewsNoticeCardBuilder.builder()
